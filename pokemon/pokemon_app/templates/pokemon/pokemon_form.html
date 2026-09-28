@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if pokemon %}Editar Pokémon{% else %}Crear Pokémon{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg" style="border-radius: 1.2rem; background: rgba(255,255,255,0.04);">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h2 class="text-white mb-0">
+                            {% if pokemon %}Editar Pokémon{% else %}Crear Pokémon{% endif %}
+                        </h2>
+                    </div>
+
+                    <form method="post" class="row g-3">
+                        {% csrf_token %}
+
+                        <div class="col-md-6">
+                            <label class="form-label text-light">Nombre</label>
+                            {{ form.name }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label text-light">Orden</label>
+                            {{ form.order }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label text-light">Altura</label>
+                            {{ form.height }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label text-light">Peso</label>
+                            {{ form.weight }}
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <h5 class="text-warning mb-3">Sprites</h5>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label text-light">Frontal</label>
+                            {{ sprites_form.front_default }}
+                        </div>
+                       
+                        <div class="col-12 d-flex justify-content-between mt-4 pt-3 border-top border-secondary">
+                            <a href="{% url 'pokemon_list' %}" class="btn btn-outline-light">Cancelar</a>
+                            <button type="submit" class="btn btn-warning px-4 fw-semibold">
+                                {% if pokemon %}Guardar cambios{% else %}Crear Pokémon{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
